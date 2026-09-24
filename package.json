@@ -1,0 +1,12 @@
+{
+    "name": "Canvas Homework Tracker",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "cd client/ && npm run build",
+        "start": "cd client/ && npm run dev",
+        "lint": "eslint .",
+        "preview": "cd client/ && npm run preview"
+    }
+}
