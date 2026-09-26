@@ -1,29 +1,29 @@
+import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
 import './App.css'
-import GET_LOCATIONS from './components/test.tsx';
+
+// test schema ( REMOVE LATER )
+const GET_HELLO = gql`
+  query {
+    hello
+  }
+`;
 
 const DisplayTest: any = () => {
-  const { loading, error, data}: any = useQuery(GET_LOCATIONS);
+  const { loading, error, data}: any = useQuery(GET_HELLO);
 
   if (loading) return <p>...loading</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  return data.locations.map(({id, name, description}: any) => (
-    <div>
-      <h1>{id}</h1>
-      <h2>{name}</h2>
-      <p>{description}</p>
-    </div>
-  ))
+  return <h1>{data.hello}</h1>;
 }
 
 function App() {
-
   return (
     <>
-      <DisplayTest/>
+        <DisplayTest/>
     </>
   )
-}
+};
 
 export default App

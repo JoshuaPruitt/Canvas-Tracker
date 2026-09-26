@@ -1,22 +1,20 @@
-import { ApolloClient, HttpLink, InMemoryCache} from "@apollo/client";
+import { StrictMode } from 'react'
 import { ApolloProvider } from "@apollo/client/react";
-
-// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import App from './App.tsx'
+import client from "./graphql.ts";
 
-const client = new ApolloClient({
-  link: new HttpLink({uri: 'http://localhost:5173/apollo'}),
-  cache: new InMemoryCache()
-});
+import './index.css'
 
-const root = createRoot(document.getElementById('root') as HTMLElement);
+
+const root = createRoot(document.getElementById('root')! as HTMLElement);
 
 root.render(
-  <ApolloProvider client={client}>
-    <App/>
-  </ApolloProvider>,
+  <StrictMode>
+    <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>,
+  </StrictMode>
 );
 
 export default client;

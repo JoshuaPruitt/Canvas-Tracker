@@ -6,7 +6,12 @@
     "scripts": {
         "build": "cd client/ && npm run build",
         "start": "cd client/ && npm run dev",
+        "server": "python server/server.py",
+        "dev": "concurrently \"npm run server\" \"npm run start\"",
         "lint": "eslint .",
         "preview": "cd client/ && npm run preview"
+    },
+    "devDependencies": {
+        "concurrently": "^10.0.5"
     }
 }

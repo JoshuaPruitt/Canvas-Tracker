@@ -6,6 +6,11 @@
 # Mac Files
 *.DS_STORE
 
+#python files
+.venv
+venv/
+env/
+
 # Logs
 logs
 *.log
