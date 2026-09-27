@@ -2,6 +2,9 @@ import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
 import './App.css'
 
+// import { addMocksToSchema } from '@graphql-tools/mock';
+// import { makeExecutableSchema } from '@graphql-tools/schema';
+
 // test schema ( REMOVE LATER )
 const GET_HELLO = gql`
   query {
@@ -22,6 +25,10 @@ function App() {
   return (
     <>
         <DisplayTest/>
+
+        <div>
+          <a href='https://studio.apollographql.com/sandbox/explorer'><button type='button'><h2>Apollo Sandbox</h2></button></a>
+        </div>
     </>
   )
 };

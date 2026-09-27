@@ -13,8 +13,18 @@ schema = graphene.Schema(query=Query)
 app = Flask(__name__)
 app.add_url_rule(
     '/graphql',
-    view_func=GraphQLView.as_view('graphql', schema=schema, graphiql = True)
-)
+    view_func=GraphQLView.as_view(
+        'graphql', 
+        schema=schema, 
+        graphiql = True
+))
+
+## Rule for graphql to support batch query in apollo client
+app.add_url_rule('/graphql/batch', view_func=GraphQLView.as_view(
+    'graphql',
+    schema=schema,
+    batch=True
+))
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
