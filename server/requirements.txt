@@ -1,4 +1,0 @@
-flask
-flask-graphql
-flask-cors
-graphene
