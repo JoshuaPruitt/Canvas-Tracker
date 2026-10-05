@@ -13,15 +13,6 @@ const CREATE_ITEM = gql`
   }
 `;
 
-// const DisplayTest: any = () => {
-//   const { loading, error, data}: any = useQuery(GET_HELLO);
-
-//   if (loading) return <p>...loading</p>;
-//   if (error) return <p>Error: {error.message}</p>;
-
-//   return <h1>{data.hello}</h1>;
-// }
-
 function MyComponent() {
   const [createItem] = useMutation(CREATE_ITEM);
 
