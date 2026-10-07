@@ -3,6 +3,9 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 
 // Test type defs REMOVE LATER
 const typeDefs = `
+    type Query {
+        hello: String
+    }
 `;
 
 // Test Resolvers REMOVE LATER
@@ -12,10 +15,20 @@ const resolvers =  {
     },
 };
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers
-});
 
-const { url } = await startStandaloneServer(server)
-console.log(`Server Ready at ${url}`);
+async function startApolloServer (){
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers
+    });
+
+    const { url } = await startStandaloneServer(server, {
+        listen: {
+            port: 4000
+        },
+    })
+    
+    console.log(`Server Ready at ${url}`);
+}
+
+startApolloServer()

@@ -13,7 +13,7 @@ root.render(
   <StrictMode>
     <ApolloProvider client={client}>
         <App />
-      </ApolloProvider>,
+      </ApolloProvider>
   </StrictMode>
 );
 

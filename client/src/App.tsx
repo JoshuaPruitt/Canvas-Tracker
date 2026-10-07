@@ -1,26 +1,24 @@
 import { gql } from '@apollo/client';
-import { useMutation } from '@apollo/client/react';
 import './App.css'
+import client from './graphql.ts';
+import { useState } from 'react';
 
-// import { addMocksToSchema } from '@graphql-tools/mock';
-// import { makeExecutableSchema } from '@graphql-tools/schema';
-const CREATE_ITEM = gql`
-  mutation CreateItem($name: String!, $value: Int) {
-    createItem(name: $name, value: $value) {
-      id
-      name
-    }
+
+//test items, trying to get basic functionality
+const GET_HELLO: any = gql`
+  query {
+    hello
   }
-`;
+`
 
 function MyComponent() {
-  const [createItem] = useMutation(CREATE_ITEM);
+  const [requestIndex, setRequest] = useState()
 
-  const handleSubmit = (name: any, value: any) => {
-    createItem({ variables: { name, value } });
-  };
+  const hello_query: any = () => {
+    client.query({ query: GET_HELLO}).then((result) => console.log(result.data));
+  }
 
-  return <button onClick={() => handleSubmit('foo', 42)}>Submit</button>;
+  return <button onClick={hello_query}>Submit</button>;
 }
 
 function App() {
