@@ -6,7 +6,7 @@
     "scripts": {
         "build": "concurrently \"cd client/ && npm run build\" \"cd server/ && npm run build\"",
         "start": "cd client/ && npm run dev",
-        "server": "cd server/ && npm run start",
+        "server": "cd test_server/ && npm run start",
         "dev": "concurrently \"npm run server\" \"npm run start\"",
         "lint": "eslint .",
         "preview": "cd client/ && npm run preview"
