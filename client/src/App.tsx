@@ -1,41 +1,59 @@
 import { gql } from '@apollo/client';
-import { useMutation } from '@apollo/client/react';
 import './App.css'
+import client from './graphql.ts';
+import { useState, useEffect } from 'react';
 
-// import { addMocksToSchema } from '@graphql-tools/mock';
-// import { makeExecutableSchema } from '@graphql-tools/schema';
-const CREATE_ITEM = gql`
-  mutation CreateItem($name: String!, $value: Int) {
-    createItem(name: $name, value: $value) {
-      id
-      name
-    }
-  }
-`;
-
-// const DisplayTest: any = () => {
-//   const { loading, error, data}: any = useQuery(GET_HELLO);
-
-//   if (loading) return <p>...loading</p>;
-//   if (error) return <p>Error: {error.message}</p>;
-
-//   return <h1>{data.hello}</h1>;
-// }
-
-function MyComponent() {
-  const [createItem] = useMutation(CREATE_ITEM);
-
-  const handleSubmit = (name: any, value: any) => {
-    createItem({ variables: { name, value } });
-  };
-
-  return <button onClick={() => handleSubmit('foo', 42)}>Submit</button>;
+interface Data {
+  hello?: string;
 }
 
+interface Hello {
+  id?: number,
+  hello?: string
+};
+
 function App() {
+  const [requests, setRequest] = useState<Hello[]>([{id: 1, hello: 'world'}])
+
+  //Run the get request on startup
+  useEffect(() => {
+    GetQuery()
+  }, []);
+
+  // CHANGE LATER : Will be moved to seperate file soon. Is here for testing
+  const GET_HELLO: any = gql`
+    query {
+      hello
+    }
+  `
+
+  // Get the data from server and append to requests
+  const GetQuery = () => {
+    client.query({ query: GET_HELLO})
+      .then((result) => {
+        if (!result.data) return;
+        
+        const data: Data = result.data;
+        console.log(result); // DEBUG
+
+        const id: number = requests.length + 1
+        return setRequest([...requests, {id: id, hello: data.hello}])
+    });
+  };
+
   return (
     <>
-        <MyComponent></MyComponent>
+      <button type='button' onClick={GetQuery}>Submit</button>
+      
+      <div>
+        { //Map requests on page
+          requests.map((request: Hello, i) => {
+            
+            console.log(`mapping request... ${request.hello}`) // DEBUG
+            return (<h2 key={i}>{request.hello}</h2>)
+          })
+        }
+      </div>
     </>
   )
 };

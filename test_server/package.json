@@ -1,0 +1,19 @@
+{
+    "name": "Canvas Homework Tracker",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/server.js"
+    },
+    "devDependencies": {
+        "concurrently": "^10.0.5",
+        "typescript": "^7.0.2"
+    },
+    "dependencies": {
+        "@apollo/server": "^5.5.1",
+        "apollo-server-express": "^3.13.0",
+        "graphql": "^16.14.2"
+    }
+}
